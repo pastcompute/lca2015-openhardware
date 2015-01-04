@@ -51,7 +51,7 @@ git reset --hard HEAD
 prepare_for_build demoB
 make defconfig
 # There needs to be a symlink for module dependencies to work
-( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
+( cd files ; mkdir -p lib/modules ; cd lib/modules ; ln -sf $KVER $KVER-grsec )
 perform_build demoB
 
 git checkout ar71xx-$KVER-grsecurity
@@ -65,6 +65,6 @@ cp ../demoC.linux.config-3.14 target/linux/ar71xx/config-3.14
 make defconfig
 # make toolchain/compile -j
 # There needs to be a symlink for module dependencies to work
-( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
+( cd files ; mkdir -p lib/modules ; cd lib/modules ; ln -sf $KVER $KVER-grsec )
 perform_build demoC
 
