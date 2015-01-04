@@ -22,6 +22,10 @@ function prepare_for_build()
   cp ../$1.config .config
   echo src-link customfeed ../../packages > feeds.conf
   rsync -av ../files .
+
+  # There needs to be a symlink for module dependencies to work
+  ( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
+
   scripts/feeds update -a
   scripts/feeds install -a -p customfeed
 }
@@ -31,7 +35,8 @@ function perform_build()
   echo "{BUILD : $1}"
 
   make -j
-  rsync -av bin/$1/ ../bin/
+  rsync -av bin/$1 ../bin/
+  cp bin/$1/openwrt-ar71xx-generic-carambola2-initramfs-uImage.bin ../$1
   sudo cp bin/$1/openwrt-ar71xx-generic-carambola2-initramfs-uImage.bin /srv/tftp/$1
 
   echo "{FIRMWARE IMAGE: /srv/tftp/$1}"
