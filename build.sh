@@ -22,10 +22,6 @@ function prepare_for_build()
   cp ../$1.config .config
   echo src-link customfeed ../../packages > feeds.conf
   rsync -av ../files .
-
-  # There needs to be a symlink for module dependencies to work
-  ( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
-
   scripts/feeds update -a
   scripts/feeds install -a -p customfeed
 }
@@ -54,6 +50,8 @@ git reset --hard HEAD
 
 prepare_for_build demoB
 make defconfig
+# There needs to be a symlink for module dependencies to work
+( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
 perform_build demoB
 
 git checkout ar71xx-$KVER-grsecurity
@@ -66,5 +64,7 @@ prepare_for_build demoC
 cp ../demoC.linux.config-3.14 target/linux/ar71xx/config-3.14 
 make defconfig
 # make toolchain/compile -j
+# There needs to be a symlink for module dependencies to work
+( cd files ; mkdir -p lib/modules ; ln -sf $KVER $KVER-grsec )
 perform_build demoC
 
