@@ -4,8 +4,8 @@
 
 set -e
 
-DLDIR=${DLDIR:-/scratch/DL/openwrt}
-REPO=${REPO:-https://github.com/pastcompute/openwrt-cc-linux-3.14.x-grsecurity.git}
+DLDIR=${DLDIR:~/openwrt-downloads}
+REPO=${REPO:-https://github.com/pastcompute/openwrt-cc-ar71xx-hardened.git}
 KVER=3.14.27
 C=${MAKE_CONCURRENCY:-4}
 
@@ -34,7 +34,7 @@ function perform_build()
   make -j$C
   rsync -av bin/$1 ../bin/
   cp bin/$1/openwrt-ar71xx-generic-carambola2-initramfs-uImage.bin ../$1
-  sudo cp bin/$1/openwrt-ar71xx-generic-carambola2-initramfs-uImage.bin /srv/tftp/$1
+  sudo cp bin/$1/openwrt-ar71xx-generic-carambola2-initramfs-uImage.bin /srv/tftp/$1 || true
 
   echo "{FIRMWARE IMAGE: /srv/tftp/$1}"
 }
