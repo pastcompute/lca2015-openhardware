@@ -33,7 +33,7 @@ Preparing for downloads
 
 On Debian Wheezy I did the following:
 
-* Installed tftpd-hpa
+* apt-get install minicom tftpd-hpa
 * Enabled tftp services on `/srv/tftp`
 * Added an alias IP address on the same subnet as the Carambola2 U-boot (see below)
 
@@ -56,4 +56,7 @@ Demonstrations
 * The demo programs are in `/usr/local/bin`
 * `paxctl` is in `/usr/sbin`. Note, `paxctl` doesn't work on programs in use (like busybox), and presently doesnt work on files in a jffs2 partition.
 
+Note
+====
 
+Minicom may need hardware flow control turned off.

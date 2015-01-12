@@ -4,7 +4,7 @@
 
 set -e
 
-DLDIR=${DLDIR:~/openwrt-downloads}
+DLDIR=${DLDIR:-~/openwrt-downloads}
 REPO=${REPO:-https://github.com/pastcompute/openwrt-cc-ar71xx-hardened.git}
 KVER=3.14.27
 C=${MAKE_CONCURRENCY:-4}
@@ -39,7 +39,8 @@ function perform_build()
   echo "{FIRMWARE IMAGE: /srv/tftp/$1}"
 }
 
-git checkout upstream
+git checkout -b ar71xx-3.14.27-grsecurity-base0 || true
+git checkout ar71xx-3.14.27-grsecurity-base0
 git reset --hard HEAD
 
 prepare_for_build demoA
