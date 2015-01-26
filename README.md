@@ -3,6 +3,8 @@ lca2015-openhardware
 
 Scripts used to build demo firmware for LCA2015 open hardware presentation.
 
+The slides can be found [here](http://andrewmcdonnell.net/slides/lca2015_openhardware.pdf).
+
 
 Building the Firmware for the Demos
 -----------------------------------
